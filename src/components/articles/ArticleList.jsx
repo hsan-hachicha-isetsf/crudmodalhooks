@@ -2,7 +2,8 @@ import React,{ useMemo } from 'react'
 import { MaterialReactTable } from 'material-react-table';
 import { Box } from '@mui/material';
 import Button from 'react-bootstrap/Button';
-const ArticleList = ({products,deleteProduct,a}) => {
+import EditArticle from './EditArticle';
+const ArticleList = ({products,deleteProduct,scategories,updateProduct}) => {
 
   const delpr=(productid,ref)=>{
     deleteProduct(productid,ref)
@@ -62,16 +63,7 @@ const ArticleList = ({products,deleteProduct,a}) => {
         size: 100,
         Cell: ({ cell, row }) => (
         <div >
-        <Button
-        onClick={() => {
-        console.log("modification ...")
-        }}
-        variant="warning"
-        size="md"
-        className="text-warning btn-link edit"
-        >
-        <i class="fa-solid fa-pen-to-square"></i>
-        </Button>
+        <EditArticle art={cell.row.original} scategories={scategories} updateProduct={updateProduct} />
         <Button
         onClick={(e) => {
         delpr(cell.row.original._id,cell.row.original.reference, e);
